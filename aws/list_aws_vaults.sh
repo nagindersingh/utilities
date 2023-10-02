@@ -33,9 +33,7 @@ for VAULT_NAME in $VAULTS; do
     RESOURCE_NAME=$(echo "$RECOVERY_POINT" | jq -r '.ResourceName')
 
 
-    CLEANED_RESOURCE_NAME=$(echo "$RESOURCE_NAME" | awk -F '-' '{print $1"-"$2"-"$3}' |  sed 's/[-]*$//')
-
-
+    CLEANED_RESOURCE_NAME=$(echo "$RESOURCE_NAME" | awk -F '-' '{print $1"-"$2"-"$3}' |  sed 's/[-]*$//')  
     if [ "$RESOURCE_TYPE" == "RDS" ]; then
 
       if ! contains "$UNIQUE_RESOURCE_NAMES" "$CLEANED_RESOURCE_NAME"; then
@@ -47,5 +45,3 @@ for VAULT_NAME in $VAULTS; do
 done
 
 echo "CSV output saved to $OUTPUT_CSV_FILE"
-
-
